@@ -12,4 +12,5 @@ venv
 
 outputs/videos/
 *.pth
+*.task
 weights/yolo/

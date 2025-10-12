@@ -16,8 +16,8 @@ import numpy as np
 import mediapipe as mp
 from pathlib import Path
 
-input_video_path = "sources/videos/IMG_2822.MOV"
-output_video_path = "outputs/videos/IMG_2822_mediapipe.mp4"
+input_video_path = "sources/videos/dead_bug.MOV"
+output_video_path = "outputs/videos/main_mediapipe_advanced.MOV"
 
 
 def draw_skeleton(frame, results):

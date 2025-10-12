@@ -9,8 +9,8 @@ mp_drawing = mp.solutions.drawing_utils
 pose = mp_pose.Pose(static_image_mode=False, model_complexity=1, min_detection_confidence=0.5)
 
 # Input and output video paths
-input_video_path = "sources/videos/IMG_2822.MOV"
-output_video_path = "outputs/videos/IMG_2822.MOV"
+input_video_path = "sources/videos/dead_bug.MOV"
+output_video_path = "outputs/videos/main_mediapipe.MOV"
 
 # Open the video file
 cap = cv2.VideoCapture(input_video_path)
