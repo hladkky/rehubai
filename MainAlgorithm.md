@@ -24,7 +24,7 @@
 6. Цикл вважається успішно завершеним, якщо усі етапи були досягнуті у правильній послідовності, з дотриманням усіх вимог.
 
 Опорні точки MediaPipe:
-![mediapipe_landmarks.png](docs/assets/mediapipe_landmarks.png)
+![mediapipe_landmarks.png](artifacts/assets/mediapipe_landmarks.png)
 
 Стаття із MediaPipe:
 https://www.researchgate.net/publication/361071987_Yoga_pose_classification_a_CNN_and_MediaPipe_inspired_deep_learning_approach_for_real-world_application
@@ -167,7 +167,7 @@ https://www.youtube.com/watch?v=g_BYB0R-4Ws
 ### Конфігурація етапів
 
 #### Етап 0: REST (початкова/відпочинкова позиція)
-![phase_0.png](docs/assets/dead_bug/phase_0.png)
+![phase_0.png](artifacts/assets/dead_bug/phase_0.png)
 **Опорні точки (MediaPipe BlazePose):**
 - 11: left_shoulder, 12: right_shoulder
 - 13: left_elbow, 14: right_elbow
@@ -214,7 +214,7 @@ https://www.youtube.com/watch?v=g_BYB0R-4Ws
 ---
 
 #### Етап 1: LEFT_PHASE (ліва нога + права рука)
-![phase_1.png](docs/assets/dead_bug/phase_1.png)
+![phase_1.png](artifacts/assets/dead_bug/phase_1.png)
 **Кутові обмеження:**
 1. Ліве стегно (випрямлена нога):
    - Точки: (11, 13, 15)
@@ -249,7 +249,7 @@ https://www.youtube.com/watch?v=g_BYB0R-4Ws
 ---
 
 #### Етап 3: RIGHT_PHASE (права нога + ліва рука)
-![phase_3.png](docs/assets/dead_bug/phase_3.png)
+![phase_3.png](artifacts/assets/dead_bug/phase_3.png)
 **Кутові обмеження:**
 1. Праве стегно (випрямлена нога):
    - Точки: (12, 14, 16)
