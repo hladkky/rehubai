@@ -1,0 +1,34 @@
+{
+  "exercise_id": "shoulder_abduction",
+  "name": "Standing shoulder abduction",
+  "notes": "UI-PRMD m07. Single-limb, authored for the CANONICAL working (right) side. Left-working subjects (s07, s10) must be mirrored with rehubai.datasets.uiprmd.mirror_lr before validation. Abduction angle = hip-shoulder-elbow (arm ray vs downward torso ray). Bands from empirical UI-PRMD correct ranges (working side): arm-down ~18, arm-up ~150-168; elbow kept near-straight (>=~145).",
+  "default_scheme": "uiprmd_kinect22",
+  "fps": 30,
+  "detection_threshold": 0.7,
+  "min_keypoint_visibility": 0.5,
+  "quality_weights": {"w_v": 1.0, "w_t": 0.5},
+
+  "stages": [
+    {
+      "id": "ARM_DOWN",
+      "min_hold_sec": 0.2,
+      "angle_constraints": [
+        {"joints": ["right_hip", "right_shoulder", "right_elbow"], "min": 0, "max": 50, "name": "arm_lowered"}
+      ]
+    },
+    {
+      "id": "ARM_UP",
+      "min_hold_sec": 0.2,
+      "angle_constraints": [
+        {"joints": ["right_hip", "right_shoulder", "right_elbow"], "min": 110, "max": 185, "name": "arm_abducted"}
+      ]
+    }
+  ],
+
+  "transitions": [
+    {"from": "ARM_DOWN", "to": "ARM_UP",   "min_sec": 0.3, "max_sec": 15.0},
+    {"from": "ARM_UP",   "to": "ARM_DOWN", "min_sec": 0.3, "max_sec": 15.0}
+  ],
+
+  "cycle_sequence": ["ARM_DOWN", "ARM_UP", "ARM_DOWN"]
+}

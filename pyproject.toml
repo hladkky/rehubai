@@ -1,0 +1,19 @@
+[project]
+name = "rehubai"
+version = "0.1.0"
+description = "Universal, config-driven validation of rehabilitation exercises from pose keypoints"
+requires-python = ">=3.9"
+authors = [{ name = "Yaroslav Hladkyi" }]
+dependencies = ["numpy>=1.26"]
+
+[project.optional-dependencies]
+mediapipe = ["mediapipe>=0.10"]
+yolo = ["ultralytics>=8.3", "onnxruntime"]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["rehubai*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

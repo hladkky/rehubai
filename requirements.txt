@@ -72,3 +72,8 @@ urllib3==1.26.20
 xtcocotools==1.14.3
 yapf==0.43.0
 zipp==3.23.0
+
+# --- rehubai validation core & backends (added) ---
+mediapipe==0.10.21
+ultralytics==8.3.211
+pytest==8.4.2

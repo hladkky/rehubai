@@ -1,0 +1,36 @@
+{
+  "exercise_id": "sit_to_stand",
+  "name": "Sit to stand",
+  "notes": "UI-PRMD m05. Bilateral, angle-only. Knee bands from empirical UI-PRMD correct ranges: standing knee p10-p90 171-179, seated knee p10-p90 3-22.",
+  "default_scheme": "uiprmd_kinect22",
+  "fps": 30,
+  "detection_threshold": 0.7,
+  "min_keypoint_visibility": 0.5,
+  "quality_weights": {"w_v": 1.0, "w_t": 0.5},
+
+  "stages": [
+    {
+      "id": "SITTING",
+      "min_hold_sec": 0.2,
+      "angle_constraints": [
+        {"joints": ["left_hip", "left_knee", "left_ankle"],   "min": 0, "max": 110, "name": "left_knee_flexed"},
+        {"joints": ["right_hip", "right_knee", "right_ankle"], "min": 0, "max": 110, "name": "right_knee_flexed"}
+      ]
+    },
+    {
+      "id": "STANDING",
+      "min_hold_sec": 0.2,
+      "angle_constraints": [
+        {"joints": ["left_hip", "left_knee", "left_ankle"],   "min": 150, "max": 185, "name": "left_knee_extended"},
+        {"joints": ["right_hip", "right_knee", "right_ankle"], "min": 150, "max": 185, "name": "right_knee_extended"}
+      ]
+    }
+  ],
+
+  "transitions": [
+    {"from": "SITTING",  "to": "STANDING", "min_sec": 0.3, "max_sec": 15.0},
+    {"from": "STANDING", "to": "SITTING",  "min_sec": 0.3, "max_sec": 15.0}
+  ],
+
+  "cycle_sequence": ["STANDING", "SITTING", "STANDING"]
+}

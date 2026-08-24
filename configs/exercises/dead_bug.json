@@ -1,0 +1,68 @@
+{
+  "exercise_id": "dead_bug",
+  "name": "Dead Bug",
+  "default_scheme": "blazepose33",
+  "fps": 30,
+  "detection_threshold": 0.7,
+  "min_keypoint_visibility": 0.5,
+  "quality_weights": {"w_v": 1.0, "w_t": 0.5},
+
+  "stages": [
+    {
+      "id": "REST",
+      "min_hold_sec": 0.3,
+      "angle_constraints": [
+        {"joints": ["left_shoulder", "left_elbow", "left_wrist"],  "ideal": 175, "tolerance": 15, "name": "left_elbow_extended"},
+        {"joints": ["right_shoulder", "right_elbow", "right_wrist"], "ideal": 175, "tolerance": 15, "name": "right_elbow_extended"},
+        {"joints": ["left_hip", "left_knee", "left_ankle"],   "ideal": 90, "tolerance": 20, "name": "left_knee_bent"},
+        {"joints": ["right_hip", "right_knee", "right_ankle"], "ideal": 90, "tolerance": 20, "name": "right_knee_bent"},
+        {"joints": ["left_elbow", "left_shoulder", "left_hip"],   "ideal": 90, "tolerance": 30, "name": "left_arm_vertical"},
+        {"joints": ["right_elbow", "right_shoulder", "right_hip"], "ideal": 90, "tolerance": 30, "name": "right_arm_vertical"}
+      ]
+    },
+    {
+      "id": "LEFT_PHASE",
+      "min_hold_sec": 0.5,
+      "angle_constraints": [
+        {"joints": ["left_hip", "left_knee", "left_ankle"],   "ideal": 175, "tolerance": 15, "name": "left_leg_extended"},
+        {"joints": ["right_hip", "right_knee", "right_ankle"], "ideal": 90,  "tolerance": 20, "name": "right_knee_bent"},
+        {"joints": ["left_shoulder", "left_elbow", "left_wrist"],   "ideal": 175, "tolerance": 15, "name": "left_arm_up"},
+        {"joints": ["right_shoulder", "right_elbow", "right_wrist"], "ideal": 170, "tolerance": 20, "name": "right_arm_straight"}
+      ],
+      "coordinate_checks": [
+        {"type": "y_above", "points": ["right_wrist", "right_shoulder"], "min_diff": 30, "name": "right_arm_overhead"}
+      ]
+    },
+    {
+      "id": "RIGHT_PHASE",
+      "min_hold_sec": 0.5,
+      "angle_constraints": [
+        {"joints": ["right_hip", "right_knee", "right_ankle"], "ideal": 175, "tolerance": 15, "name": "right_leg_extended"},
+        {"joints": ["left_hip", "left_knee", "left_ankle"],   "ideal": 90,  "tolerance": 20, "name": "left_knee_bent"},
+        {"joints": ["right_shoulder", "right_elbow", "right_wrist"], "ideal": 175, "tolerance": 15, "name": "right_arm_up"},
+        {"joints": ["left_shoulder", "left_elbow", "left_wrist"],   "ideal": 170, "tolerance": 20, "name": "left_arm_straight"}
+      ],
+      "coordinate_checks": [
+        {"type": "y_above", "points": ["left_wrist", "left_shoulder"], "min_diff": 30, "name": "left_arm_overhead"}
+      ]
+    }
+  ],
+
+  "transitions": [
+    {"from": "REST", "to": "LEFT_PHASE",  "min_sec": 1.0, "max_sec": 2.0},
+    {"from": "LEFT_PHASE", "to": "REST",  "min_sec": 1.0, "max_sec": 2.0},
+    {"from": "REST", "to": "RIGHT_PHASE", "min_sec": 1.0, "max_sec": 2.0},
+    {"from": "RIGHT_PHASE", "to": "REST", "min_sec": 1.0, "max_sec": 2.0}
+  ],
+
+  "forbidden_transitions": [
+    {"from": "LEFT_PHASE", "to": "RIGHT_PHASE"},
+    {"from": "RIGHT_PHASE", "to": "LEFT_PHASE"}
+  ],
+
+  "global_constraints": [
+    {"type": "stability", "points": ["left_shoulder", "left_hip"], "threshold": 0.10, "name": "torso_stability"}
+  ],
+
+  "cycle_sequence": ["REST", "LEFT_PHASE", "REST", "RIGHT_PHASE", "REST"]
+}
