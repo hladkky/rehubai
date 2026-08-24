@@ -1,0 +1,36 @@
+{
+  "exercise_id": "deep_squat",
+  "name": "Deep squat",
+  "notes": "UI-PRMD m01. Bilateral, angle-only (frame/scale invariant) => validates both UI-PRMD skeletons and MediaPipe video. Knee bands from empirical UI-PRMD correct ranges: standing knee p10-p90 172-180, squat-bottom knee p10-p90 2-25.",
+  "default_scheme": "uiprmd_kinect22",
+  "fps": 30,
+  "detection_threshold": 0.7,
+  "min_keypoint_visibility": 0.5,
+  "quality_weights": {"w_v": 1.0, "w_t": 0.5},
+
+  "stages": [
+    {
+      "id": "STANDING",
+      "min_hold_sec": 0.2,
+      "angle_constraints": [
+        {"joints": ["left_hip", "left_knee", "left_ankle"],   "min": 150, "max": 185, "name": "left_knee_extended"},
+        {"joints": ["right_hip", "right_knee", "right_ankle"], "min": 150, "max": 185, "name": "right_knee_extended"}
+      ]
+    },
+    {
+      "id": "SQUAT",
+      "min_hold_sec": 0.2,
+      "angle_constraints": [
+        {"joints": ["left_hip", "left_knee", "left_ankle"],   "min": 0, "max": 110, "name": "left_knee_flexed"},
+        {"joints": ["right_hip", "right_knee", "right_ankle"], "min": 0, "max": 110, "name": "right_knee_flexed"}
+      ]
+    }
+  ],
+
+  "transitions": [
+    {"from": "STANDING", "to": "SQUAT",    "min_sec": 0.3, "max_sec": 15.0},
+    {"from": "SQUAT",    "to": "STANDING", "min_sec": 0.3, "max_sec": 15.0}
+  ],
+
+  "cycle_sequence": ["STANDING", "SQUAT", "STANDING"]
+}

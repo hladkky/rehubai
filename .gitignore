@@ -14,3 +14,5 @@ outputs/videos/
 *.pth
 *.task
 weights/yolo/
+
+datasets/uiprmd/raw/

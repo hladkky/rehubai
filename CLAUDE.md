@@ -40,3 +40,6 @@ Exercise configs are JSON files — adding a new exercise requires ONLY a new co
 
 ## Notion (research notes)
 https://www.notion.so/127e9718b1f1806b8bb7e3abcab2cb3a
+
+## IIT docs
+All related docs are in `docs/` folder.
